@@ -23,10 +23,12 @@ class PostRepositorySQLiteImpl(private val dao: PostDao) : PostRepository {
         posts = posts.map {
             if (it.id == id) {
                 val updatedLikeStatus = !it.likedByMe
-                it.copy(
+                val updatedPost = it.copy(
                     likedByMe = updatedLikeStatus,
                     likes = if (updatedLikeStatus) it.likes + 1 else it.likes - 1
                 )
+                dao.like(updatedPost.id)
+                updatedPost
             } else {
                 it
             }
@@ -37,7 +39,9 @@ class PostRepositorySQLiteImpl(private val dao: PostDao) : PostRepository {
     override fun share(id: Long) {
         posts = posts.map { post ->
             if (post.id == id) {
-                post.copy(sharings = post.sharings + 1)
+                val updatedPost = post.copy(sharings = post.sharings + 1)
+                dao.share(updatedPost.id)
+                updatedPost
             } else {
                 post
             }

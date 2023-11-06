@@ -30,7 +30,7 @@ class PostViewHolder(
                 onInteractionListener.share(post)
             }
             sharingIcon.text = formatAmount(post.sharings)
-            if (post.video.isNullOrEmpty() || post.video == "null") {
+            if (post.video.isNullOrEmpty()) {
                 videoGroupViews.visibility = View.GONE
             } else {
                 videoGroupViews.visibility = View.VISIBLE

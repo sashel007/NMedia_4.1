@@ -16,7 +16,7 @@ import ru.netology.nmedia.databinding.TargetPostLayoutBinding
 import ru.netology.nmedia.viewmodel.PostViewModel
 
 class TargetPostFragment : Fragment() {
-    val sharedViewModel: PostViewModel by activityViewModels()
+    private val sharedViewModel: PostViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -42,17 +42,17 @@ class TargetPostFragment : Fragment() {
                 }
                 includedPostCard.sharingIcon.text = formatAmount(post.sharings)
 
-//                if (post.video.isNullOrEmpty()) {
-//                    includedPostCard.videoGroupViews.visibility = View.GONE
-//                } else {
-//                    includedPostCard.videoGroupViews.visibility = View.VISIBLE
-//                    includedPostCard.playButton.setOnClickListener {
-//                        interactionListener?.playVideo(post.video)
-//                    }
-//                    includedPostCard.videoImage.setOnClickListener {
-//                        interactionListener?.playVideo(post.video)
-//                    }
-//                }
+                if (post.video.isNullOrEmpty()) {
+                    includedPostCard.videoGroupViews.visibility = View.GONE
+                } else {
+                    includedPostCard.videoGroupViews.visibility = View.VISIBLE
+                    includedPostCard.playButton.setOnClickListener {
+                        interactionListener?.playVideo(post.video)
+                    }
+                    includedPostCard.videoImage.setOnClickListener {
+                        interactionListener?.playVideo(post.video)
+                    }
+                }
                 includedPostCard.menu.setOnClickListener {
                     PopupMenu(it.context, it).apply {
                         inflate(R.menu.menu_options)

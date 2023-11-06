@@ -44,7 +44,9 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun like(id: Long) = repository.like(id)
+    fun share(id: Long) = repository.share(id)
     fun removeById(id: Long) = repository.removeById(id)
+    fun save(post: Post) = repository.save(post)
 
     fun resetEditingState() {
         edited.value = empty
